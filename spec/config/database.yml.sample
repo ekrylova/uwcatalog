@@ -1,0 +1,7 @@
+UW:
+  username: xxxx
+  password: xxxx
+  host: xxx.library.wisc.edu
+  port: 1521
+  path: /xxxx.library.wisc.edu
+
