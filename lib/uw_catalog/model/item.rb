@@ -5,7 +5,6 @@ module UwCatalog
                   :item_status_date, :current_due_date, :hold_recall_status_date
 
     def initialize(h=Hash.new)
-      @holdings = Array.new
       h.each {|k,v| send("#{k}=",v)}
     end
 
