@@ -22,11 +22,9 @@ module UwCatalog
 
     def add_holding(holding)
       idx = @holdings.index(holding)
-      puts "#{idx}"
       if idx.nil?
         holdings << holding
       end
-      puts holdings.inspect
     end
 
     def get_holding(holding)
