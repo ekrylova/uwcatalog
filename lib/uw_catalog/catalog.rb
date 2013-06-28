@@ -31,31 +31,42 @@ module UwCatalog
                      :hold_recall_status_date=>d[:hold_recall_status_date]})
     end
 
-    def self.get_items(bibid)
+
+    def self.get_availability_data_hash(bibid)
+        data_hash = Catalog.get_items_data_hash(bibid)
+    end
+
+    def self.parse_availability_data_hash(data_hash)
+      ret = Array.new
+      data_hash.each do |d|
+        loc = Location.new({:id => d[:location_id], :location => d[:location], 
+                              :temp_location_id => d[:temp_location_id], :temp_location => d[:temp_location]})
+        idx = ret.index(loc)
+        if (idx.nil?)
+          ret << loc
+        else
+          loc = ret.at(idx)
+        end
+        h = Holding.new({:id=>d[:holding_id], :call_number => d[:display_call_no], 
+                         :item_enum => d[:item_enum]})
+        holding = loc.get_holding(h)
+        if (holding.nil?)
+          loc.add_holding(h)
+          holding = h
+        end
+        if (!d[:item_id].nil?)
+          item = get_item_from_hash(d) 
+          holding.items << item
+        end
+      end
+      ret
+    end
+
+    def self.get_availability_data(bibid)
       ret = Array.new
       begin
-        data_hash = Catalog.get_items_data_hash(bibid)
-        data_hash.each do |d|
-          loc = Location.new({:id => d[:location_id], :location => d[:location], 
-                              :temp_location_id => d[:temp_location_id], :temp_location => d[:temp_location]})
-          idx = ret.index(loc)
-          if (idx.nil?)
-            ret << loc
-          else
-            loc = ret.at(idx)
-          end
-          h = Holding.new({:id=>d[:holding_id], :call_number => d[:display_call_no], :item_enum => d[:item_enum]})
-          holding = loc.get_holding(h)
-          if (holding.nil?)
-            loc.add_holding(h)
-            holding = h
-          end
-          if (!d[:item_id].nil?)
-            item = get_item_from_hash(d) 
-            holding.items << item
-          end
-        end
-        ret
+        data_hash = get_availability_data_hash(bibid)
+        parse_availability_data_hash(data_hash)
       rescue => e
         throw UwCatalogError.new("#{e.class}: #{e.message}") 
       end
