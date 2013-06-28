@@ -40,7 +40,7 @@ module UwCatalog
       items.each do |item|
         status_available, status_text = get_status(item)
         status_list <<  {:item_id => item.id, :status_text => status_text, 
-                 :available => status_available, :item_enum => item.item_enum}
+                 :available => status_available, :copy_number=> item.copy_number, :item_enum => item.item_enum}
       end
 
       status_list.sort! {|a,b| a[:item_enum].to_s <=> b[:item_enum].to_s} unless status_list.size ==0
