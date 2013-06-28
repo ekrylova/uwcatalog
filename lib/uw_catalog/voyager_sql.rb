@@ -23,13 +23,10 @@ module UwCatalog
       "mfhd_item.item_enum," +     
       "item.item_id, " +
       "item.copy_number," +
-      "item.perm_location," +
-      "item.temp_location," +
       "item.on_reserve, " +
       "item.item_type_id," +
-      "item_status.item_status, " +
       "item_barcode.item_barcode, " +
-      "item.item_sequence_number, " +
+      "item_status.item_status, " +
       "item_status.item_status_date," +
       "circ_transactions.current_due_date, " +
       "hold_recall_items.hold_recall_status_date " +
@@ -40,11 +37,10 @@ module UwCatalog
       "and mfhd_master.location_id=hloc.location_id " + 
       "and mfhd_master.suppress_in_opac='N' " +
       "and hloc.suppress_in_opac='N' " +
-      "and mfhd_master.mfhd_id=mfhd_item.mfhd_id " + 
+      "and mfhd_master.mfhd_id=mfhd_item.mfhd_id " +
       "and mfhd_item.item_id=item.item_id " +
-      "and item.temp_location=iloc.location_id " + 
+      "and item.temp_location=iloc.location_id (+) " + 
       "and item.item_id=item_status.item_id " +
-      "and item.item_id=item_barcode.item_id " +
       "and item.item_id=item_barcode.item_id " + 
       "and item_barcode.barcode_status=1 " +
       "and item.item_id=circ_transactions.item_id (+) " +
@@ -54,19 +50,19 @@ module UwCatalog
     def self.get_holdings_without_items_sql()
       "select distinct mfhd_master.mfhd_id as holding_id," + 
       "mfhd_master.location_id, " +
-      "location.location_display_name," + 
+      "location.location_display_name as location," + 
       "null as temp_location_id," +
       "null as temp_location," +  
       "mfhd_master.display_call_no," +  
-      "null as item_enum, " +    
+      "null as item_enum, " +  
       "null as item_id, " +
       "null as copy_number, " +
       "null as perm_location, " +
       "null as temp_location, " +
       "null as on_reserve, " +
       "null as item_type_id," +
-      "null as item_status, " +
       "null as item_barcode, " +
+      "null as item_status, " +
       "null as item_sequence_number," + 
       "null as item_status_date," +
       "null as current_due_date, " + 
