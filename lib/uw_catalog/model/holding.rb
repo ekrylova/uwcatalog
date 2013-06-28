@@ -42,7 +42,8 @@ module UwCatalog
         status_list <<  {:item_id => item.id, :status_text => status_text, 
                  :available => status_available, :item_enum => item.item_enum}
       end
-      status_list.sort! {|a,b| a[:item_enum] <=> b[:item_enum]} unless status_list.size ==0
+
+      status_list.sort! {|a,b| a[:item_enum].to_s <=> b[:item_enum].to_s} unless status_list.size ==0
       ret[:status] = status_list
       ret
     end
