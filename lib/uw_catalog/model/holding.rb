@@ -1,6 +1,6 @@
 module UwCatalog
   class Holding
-    @@date_format = "%d %B, %Y"
+    @@date_format = "%B %d, %Y"
     attr_accessor :id, :call_number, :item_enum, :items
 
     def initialize(h=Hash.new)
@@ -17,6 +17,34 @@ module UwCatalog
 	return Array.new
       end
       copies = items.collect {|c| c.copy_number}.uniq
+    end
+    
+    def get_item_rank(item)
+      status_guide = VoyagerItemStatus.status_guide(item.item_status.to_i)
+      status_guide[:rank]
+    end
+
+    def override_status(item)
+      (16 == item.item_status.to_i)
+    end
+
+    def add_item(item)
+      idx = items.index(item)
+      if idx.nil?
+        items << item
+      else
+        item_in_list = items.fetch(idx)
+        if override_status(item_in_list)
+        elsif override_status(item)
+            items.delete_at(idx)
+            items << item
+        else 
+          if get_item_rank(item_in_list) > get_item_rank(item)
+            items.delete_at(idx)
+            items << item
+          end
+        end
+      end
     end
 
     def get_items_display
@@ -65,7 +93,10 @@ module UwCatalog
         elsif !item.hold_recall_status_date.nil?
           status_date = item.hold_recall_status_date.strftime(@@date_format)
           status_text = "#{status_text} #{status_date}."
-        end
+        elsif !item.item_status_date.nil?
+          status_date = item.item_status_date.strftime(@@date_format)
+          status_text = "#{status_text} #{status_date}."
+         end
       end
       return [status_available, status_text]
    end

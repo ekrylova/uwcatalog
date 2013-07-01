@@ -1,7 +1,7 @@
 module UwCatalog
   class Location
 
-    attr_accessor :id, :location, :temp_location_id, :temp_location, :holdings
+    attr_accessor :id, :location, :perm_location_id, :perm_location, :holdings
 
     def initialize(h=Hash.new)
       @holdings = Array.new
@@ -13,11 +13,7 @@ module UwCatalog
     end
 
     def display_location
-      if !temp_location.nil?
-         temp_location
-      else
-         location
-      end
+      location
     end
 
     def add_holding(holding)

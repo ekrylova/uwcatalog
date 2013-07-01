@@ -31,7 +31,6 @@ module UwCatalog
                      :hold_recall_status_date=>d[:hold_recall_status_date]})
     end
 
-
     def self.get_availability_data_hash(bibid)
         data_hash = Catalog.get_items_data_hash(bibid)
     end
@@ -39,8 +38,15 @@ module UwCatalog
     def self.parse_availability_data_hash(data_hash)
       ret = Array.new
       data_hash.each do |d|
-        loc = Location.new({:id => d[:location_id], :location => d[:location], 
-                              :temp_location_id => d[:temp_location_id], :temp_location => d[:temp_location]})
+	loc_id = d[:location_id]
+	location = d[:location]
+        if !d[:temp_location].nil?
+           loc_id = d[:temp_location_id]
+	   location = d[:temp_location]
+        end
+
+        loc = Location.new({:id => loc_id, :location => location,
+                            :perm_location_id => d[:location_id], :perm_location => d[:location]})
         idx = ret.index(loc)
         if (idx.nil?)
           ret << loc
@@ -56,7 +62,7 @@ module UwCatalog
         end
         if (!d[:item_id].nil?)
           item = get_item_from_hash(d) 
-          holding.items << item
+	  holding.add_item(item)
         end
       end
       ret

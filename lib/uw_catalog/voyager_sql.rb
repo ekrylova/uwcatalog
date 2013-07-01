@@ -41,8 +41,6 @@ module UwCatalog
       "and mfhd_item.item_id=item.item_id " +
       "and item.temp_location=iloc.location_id (+) " + 
       "and item.item_id=item_status.item_id " +
-      "and item_status.item_status_date= " +
-      "(select max(is_eff.item_status_date) from item_status is_eff where is_eff.item_id=item.item_id) " +
       "and item.item_id=item_barcode.item_id " + 
       "and item_barcode.barcode_status=1 " +
       "and item.item_id=circ_transactions.item_id (+) " +
