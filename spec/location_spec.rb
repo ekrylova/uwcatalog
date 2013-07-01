@@ -43,7 +43,7 @@ module UwCatalog
       items_status_data[0][:status_text].should == 'Lost June 14, 2004.'
     end
 
-    it "lost holding should have item status date of the item" do
+    it "overdue holding should have item status date of the item" do
       availability_data = load_data_from_file('overdue.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
@@ -55,7 +55,7 @@ module UwCatalog
     end
 
 
-    it "lost holding should have item status date of the item" do
+    it "holding with two copies both checked out should have item due date of each  item" do
       availability_data = load_data_from_file('two_copies_checkedout.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
@@ -68,7 +68,7 @@ module UwCatalog
       items_status_data[1][:status_text].should == 'v.2 Not Available - Checked Out, Due on December 30, 2013'
     end
 
-    it "lost holding should have item status date of the item" do
+    it "holding with 5 out of 10 items checkout should have item status date of all checkout items" do
       availability_data = load_data_from_file('5_out_of_10_bindery.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
@@ -82,6 +82,19 @@ module UwCatalog
       unavailable_items[0][:status_text].should == 'v.1:supp. Not Available - At Bindery June 02, 2011'
       unavailable_items[4][:available] == false
       unavailable_items[4][:status_text].should == 'v.5:supp. Not Available - At Bindery June 02, 2011'
+    end
+
+    it "holding with all items available should status 'aggregated' status of available" do
+      availability_data = load_data_from_file('all_available.dat')
+      availability_data.size.should  == 1
+      availability_data[0].holdings.size.should  == 1
+      availability_data[0].holdings[0].items.size.should  == 3
+      items_status_data = availability_data[0].holdings[0].get_items_display[:status]
+      items_status_data.size.should  == 3
+      unavailable_items = availability_data[0].holdings[0].get_items_display(true)[:status]
+      unavailable_items.size.should  == 1
+      unavailable_items[0][:available] == true
+      unavailable_items[0][:status_text].should == 'Available'
     end
 
   end

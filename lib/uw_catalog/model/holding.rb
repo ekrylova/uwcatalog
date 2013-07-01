@@ -59,7 +59,11 @@ module UwCatalog
       end
 
       if (concise)
+        total_count = status_list.size
 	status_list.keep_if{|i| i[:available] == false}.compact
+        if (total_count > 0 && status_list.size == 0)
+          status_list << {:status_text => 'Available', :available => true}
+        end
       end
       status_list.sort! {|a,b| a[:item_enum].to_s <=> b[:item_enum].to_s} unless status_list.size ==0
       ret[:status] = status_list
