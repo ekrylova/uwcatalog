@@ -19,12 +19,12 @@ module UwCatalog
       copies = items.collect {|c| c.copy_number}.uniq
     end
     
-    def get_item_rank(item)
+    def self.get_item_rank(item)
       status_guide = VoyagerItemStatus.status_guide(item.item_status.to_i)
       status_guide[:rank]
     end
 
-    def override_status(item)
+    def self.override_status(item)
       (16 == item.item_status.to_i)
     end
 
@@ -47,23 +47,10 @@ module UwCatalog
       end
     end
 
-    def get_items_display
+    def get_items_display(concise = false)
       return Hash.new unless items.size > 0
-
-      copies = get_copies
-      if (copies.size == items.size) 
-        ret = one_item_per_copy
-      else
-        ret = multiple_items_per_copy(copies)
-      end
-    end
-
-    def one_item_per_copy
-      ret = Hash.new 
-      if (items.nil?)
-        return ret
-      end
-
+      
+      ret = Hash.new
       status_list = Array.new 
       items.each do |item|
         status_available, status_text = get_status(item)
@@ -71,13 +58,12 @@ module UwCatalog
                  :available => status_available, :copy_number=> item.copy_number, :item_enum => item.item_enum}
       end
 
+      if (concise)
+	status_list.keep_if{|i| i[:available] == false}.compact
+      end
       status_list.sort! {|a,b| a[:item_enum].to_s <=> b[:item_enum].to_s} unless status_list.size ==0
       ret[:status] = status_list
       ret
-    end
-
-    def multiple_items_per_copy(copies)
-      one_item_per_copy
     end
 
     def get_status(item)
@@ -87,16 +73,22 @@ module UwCatalog
       ret = status_text
       status_date = nil
       if status_guide[:display_date]
-        if !item.current_due_date.nil? 
-          status_date = item.current_due_date.strftime(@@date_format)
-          status_text = "#{status_text}, Due on #{status_date}."
-        elsif !item.hold_recall_status_date.nil?
-          status_date = item.hold_recall_status_date.strftime(@@date_format)
-          status_text = "#{status_text} #{status_date}."
-        elsif !item.item_status_date.nil?
-          status_date = item.item_status_date.strftime(@@date_format)
-          status_text = "#{status_text} #{status_date}."
-         end
+        case item.item_status.to_i
+        when 2, 3
+          status_date = item.current_due_date.strftime(@@date_format) unless item.current_due_date.nil?
+          if (!item.item_enum.nil?)
+            status_text = "#{item.item_enum} Not Available - #{status_text}, Due on #{status_date}"
+          else
+            status_text = "#{status_text}, Due on #{status_date}."
+          end
+        else  
+          status_date = item.item_status_date.strftime(@@date_format) unless item.item_status_date.nil?
+          if (!item.item_enum.nil?)
+            status_text = "#{item.item_enum} Not Available - #{status_text} #{status_date}"
+          else
+            status_text = "#{status_text} #{status_date}."
+          end
+        end
       end
       return [status_available, status_text]
    end
