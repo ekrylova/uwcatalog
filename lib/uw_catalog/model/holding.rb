@@ -48,24 +48,25 @@ module UwCatalog
     end
 
     def get_items_display(concise = false)
-      return Hash.new unless items.size > 0
-      
       ret = Hash.new
+      return ret unless items.size > 0
+
       status_list = Array.new 
+
       items.each do |item|
         status_available, status_text = get_status(item)
-        status_list <<  {:item_id => item.id, :status_text => status_text, 
-                 :available => status_available, :copy_number=> item.copy_number, :item_enum => item.item_enum}
+        status_list <<  {:item_id => item.id, :status_text => status_text,
+               :available => status_available, :copy_number=> item.copy_number, :item_enum => item.item_enum}
       end
-
       if (concise)
         total_count = status_list.size
-	status_list.keep_if{|i| i[:available] == false}.compact
+        status_list.keep_if{|i| i[:available] == false}.compact
         if (total_count > 0 && status_list.size == 0)
           status_list << {:status_text => 'Available', :available => true}
         end
       end
-      status_list.sort! {|a,b| a[:item_enum].to_s <=> b[:item_enum].to_s} unless status_list.size ==0
+
+      status_list.sort! {|a,b| a[:item_enum].to_s <=> b[:item_enum].to_s} unless status_list.size < 1
       ret[:status] = status_list
       ret
     end
