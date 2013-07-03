@@ -4,7 +4,7 @@ module UwCatalog
 
     def self.get_bibliographic_sql()
       "select distinct bib_text.bib_id as bibid, bib_text.author as author, bib_text.title_brief as title, " + 
-      "bib_text.publisher as publisher, bib_text.begin_pub_date as publish_date " +
+      "bib_text.edition, bib_text.pub_place, bib_text.publisher as publisher, bib_text.begin_pub_date as publish_date " +
       "from bib_text, bib_mfhd, mfhd_master, location " + 
       "where bib_text.bib_id=? " + 
       "and bib_text.bib_id=bib_mfhd.bib_id " + 
