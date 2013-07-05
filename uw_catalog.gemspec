@@ -31,4 +31,12 @@ Gem::Specification.new do |gem|
       "lib/uw_catalog/voyager_sql.rb"
     ]
   gem.require_paths = ["lib"]
+
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rspec'
+
+  gem.add_dependency('data_mapper', '~> 1.2.0')
+  gem.add_dependency('dm-oracle-adapter', '~> 1.2.0')
+  gem.add_dependency('ruby-oci8', '~> 2.1.3')
+
 end
