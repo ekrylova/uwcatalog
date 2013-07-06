@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    uw_catalog (0.0.1)
+    uw_catalog (0.0.2)
       data_mapper (~> 1.2.0)
       data_mapper (~> 1.2.0)
       dm-oracle-adapter (~> 1.2.0)
