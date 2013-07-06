@@ -1,0 +1,35 @@
+---
+- !ruby/struct
+  holding_id: 3696796
+  location_id: 1512
+  location: College Library Main Collection, 1st Floor West, Room 1191
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: BR563 N4 R25 1980
+  item_enum: 
+  item_id: 3569574
+  copy_number: 202
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89048928568'
+  item_status: 1
+  item_status_date: 2009-05-11 01:02:26.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 3696795
+  location_id: 1512
+  location: College Library Main Collection, 1st Floor West, Room 1191
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: BR563 N4 R25 1980
+  item_enum: 
+  item_id: 3569573
+  copy_number: 201
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89048928527'
+  item_status: 4
+  item_status_date: 2013-06-10 00:43:09.000000000 -05:00
+  current_due_date: 2013-06-08 20:00:00.000000000 -05:00
+  hold_recall_status_date: 

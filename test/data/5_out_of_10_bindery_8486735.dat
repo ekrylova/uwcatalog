@@ -1,0 +1,256 @@
+---
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.3
+  item_id: 9021967
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600716'
+  item_status: 1
+  item_status_date: 2011-06-21 00:39:07.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.2:supp.
+  item_id: 9022007
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600757'
+  item_status: 18
+  item_status_date: 2011-06-02 11:49:07.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.3:supp.
+  item_id: 9022012
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600765'
+  item_status: 2
+  item_status_date: 2012-09-14 14:01:36.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.5:supp.
+  item_id: 9022017
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600781'
+  item_status: 2
+  item_status_date: 2012-09-14 14:01:42.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.4
+  item_id: 9021968
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600724'
+  item_status: 1
+  item_status_date: 2011-06-21 00:39:07.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.1:supp.
+  item_id: 9021997
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600740'
+  item_status: 18
+  item_status_date: 2011-06-02 11:49:13.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.1:supp.
+  item_id: 9021997
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600740'
+  item_status: 2
+  item_status_date: 2012-09-14 14:01:23.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.4:supp.
+  item_id: 9022015
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600773'
+  item_status: 2
+  item_status_date: 2012-09-14 14:01:39.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.1
+  item_id: 9021955
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600690'
+  item_status: 1
+  item_status_date: 2011-06-21 00:39:07.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.4:supp.
+  item_id: 9022015
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600773'
+  item_status: 18
+  item_status_date: 2011-06-02 11:48:54.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.5:supp.
+  item_id: 9022017
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600781'
+  item_status: 18
+  item_status_date: 2011-06-02 11:48:46.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.2
+  item_id: 9021962
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600708'
+  item_status: 1
+  item_status_date: 2011-06-21 00:39:07.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.5
+  item_id: 9021973
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600732'
+  item_status: 1
+  item_status_date: 2011-06-21 00:39:07.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.3:supp.
+  item_id: 9022012
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600765'
+  item_status: 18
+  item_status_date: 2011-06-02 11:49:01.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 9440378
+  location_id: 495
+  location: Memorial Library East Asian Coll., 4th Floor North & South
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: GT4884 A2 N546 2009
+  item_enum: v.2:supp.
+  item_id: 9022007
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89119600757'
+  item_status: 2
+  item_status_date: 2012-09-14 14:01:30.000000000 -05:00
+  current_due_date: 2013-09-14 21:45:00.000000000 -05:00
+  hold_recall_status_date: 

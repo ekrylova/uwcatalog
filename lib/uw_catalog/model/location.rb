@@ -1,7 +1,7 @@
 module UwCatalog
   class Location
 
-    attr_accessor :id, :location, :perm_location_id, :perm_location, :holdings
+    attr_accessor :id, :location, :holdings
 
     def initialize(h=Hash.new)
       @holdings = Array.new

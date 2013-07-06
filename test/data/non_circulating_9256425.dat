@@ -1,0 +1,21 @@
+---
+- !ruby/struct
+  holding_id: 10120594
+  location_id: 62
+  location: CCBC Current Non-Fiction (Non-circulating)
+  temp_location_id: 
+  temp_location: 
+  display_call_no: 323 Carson
+  item_enum: 
+  item_id: 
+  copy_number: 
+  perm_location: 
+  temp_location: 
+  on_reserve: 
+  item_type_id: 
+  item_barcode: 
+  item_status: 
+  item_sequence_number: 
+  item_status_date: 
+  current_due_date: 
+  hold_recall_status_date: 

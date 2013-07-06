@@ -45,8 +45,7 @@ module UwCatalog
 	   location = d[:temp_location]
         end
 
-        loc = Location.new({:id => loc_id, :location => location,
-                            :perm_location_id => d[:location_id], :perm_location => d[:location]})
+        loc = Location.new({:id => loc_id, :location => location})
         idx = ret.index(loc)
         if (idx.nil?)
           ret << loc
@@ -54,7 +53,8 @@ module UwCatalog
           loc = ret.at(idx)
         end
         h = Holding.new({:id=>d[:holding_id], :call_number => d[:display_call_no], 
-                         :item_enum => d[:item_enum]})
+                         :item_enum => d[:item_enum],
+                         :perm_location_id => d[:location_id], :perm_location => d[:location]})
         holding = loc.get_holding(h)
         if (holding.nil?)
           loc.add_holding(h)

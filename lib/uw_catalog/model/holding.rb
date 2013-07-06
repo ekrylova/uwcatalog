@@ -1,7 +1,7 @@
 module UwCatalog
   class Holding
     @@date_format = "%B %d, %Y"
-    attr_accessor :id, :call_number, :item_enum, :items
+    attr_accessor :id, :call_number, :item_enum, :perm_location_id, :perm_location, :items
 
     def initialize(h=Hash.new)
       @items = Array.new
@@ -34,12 +34,12 @@ module UwCatalog
         items << item
       else
         item_in_list = items.fetch(idx)
-        if override_status(item_in_list)
-        elsif override_status(item)
+        if Holding.override_status(item_in_list)
+        elsif Holding.override_status(item)
             items.delete_at(idx)
             items << item
         else 
-          if get_item_rank(item_in_list) > get_item_rank(item)
+          if Holding.get_item_rank(item_in_list) > Holding.get_item_rank(item)
             items.delete_at(idx)
             items << item
           end

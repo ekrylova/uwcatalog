@@ -1,0 +1,35 @@
+---
+- !ruby/struct
+  holding_id: 7196774
+  location_id: 695
+  location: Steenbock Stacks -1st Floor
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: SF271 C43 2004
+  item_enum: v.2
+  item_id: 6713264
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89081649873'
+  item_status: 3
+  item_status_date: 2013-05-31 15:25:25.000000000 -05:00
+  current_due_date: 2013-12-30 18:00:00.000000000 -05:00
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 7196774
+  location_id: 695
+  location: Steenbock Stacks -1st Floor
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: SF271 C43 2004
+  item_enum: v.1
+  item_id: 6713262
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89081649907'
+  item_status: 3
+  item_status_date: 2013-05-31 15:25:25.000000000 -05:00
+  current_due_date: 2013-12-30 18:00:00.000000000 -05:00
+  hold_recall_status_date: 

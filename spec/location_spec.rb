@@ -4,24 +4,25 @@ module UwCatalog
   describe Location do
     def load_data_from_file(fname)
         f = File.read("test/data/#{fname}")
-        availability_data = Marshal::load(f)
+        data = YAML::load(f)
+        availability_data = UwCatalog::Catalog.parse_availability_data_hash(data) 
     end
 
     it "non-circulating holding should have no items" do
-      availability_data = load_data_from_file('non_circulating.dat')
+      availability_data = load_data_from_file('non_circulating_9256425.dat')
       availability_data[0].holdings[0].items.size.should  == 0
       availability_data[0].holdings[0].get_items_display.size.should  == 0
     end
 
     it "dvd holding should have no items" do
-      availability_data = load_data_from_file('dvd.dat')
+      availability_data = load_data_from_file('dvd_7636968.dat')
       availability_data[0].holdings[0].items.size.should  == 1
       availability_data[0].holdings[0].get_items_display[:status].size.should  == 1
     end
 
 
     it "two volume holding with one volume renewed should have due date of that item" do
-      availability_data = load_data_from_file('two_volume_holding_with_one_volume_renewed.dat')
+      availability_data = load_data_from_file('two_volume_holding_with_one_volume_renewed_2755020.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
       availability_data[0].holdings[0].items.size.should  == 2
@@ -33,7 +34,7 @@ module UwCatalog
     end
 
     it "lost holding should have item status date of the item" do
-      availability_data = load_data_from_file('lost.dat')
+      availability_data = load_data_from_file('lost_2837410.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
       availability_data[0].holdings[0].items.size.should  == 1 
@@ -44,19 +45,19 @@ module UwCatalog
     end
 
     it "overdue holding should have item status date of the item" do
-      availability_data = load_data_from_file('overdue.dat')
+      availability_data = load_data_from_file('overdue_2772804.dat')
       availability_data.size.should  == 1
-      availability_data[0].holdings.size.should  == 1
-      availability_data[0].holdings[0].items.size.should  == 1
-      items_status_data = availability_data[0].holdings[0].get_items_display[:status]
+      availability_data[0].holdings.size.should  == 2 
+      availability_data[0].holdings[1].items.size.should  == 1
+      items_status_data = availability_data[0].holdings[1].get_items_display[:status]
       items_status_data.size.should  == 1
       items_status_data[0][:available].should == false
-      items_status_data[0][:status_text].should == 'Overdue July 01, 2013.'
+      items_status_data[0][:status_text].should == 'Overdue June 10, 2013.'
     end
 
 
     it "holding with two copies both checked out should have item due date of each  item" do
-      availability_data = load_data_from_file('two_copies_checkedout.dat')
+      availability_data = load_data_from_file('two_copies_checkedout_6202124.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
       availability_data[0].holdings[0].items.size.should  == 2
@@ -69,7 +70,7 @@ module UwCatalog
     end
 
     it "holding with 5 out of 10 items checkout should have item status date of all checkout items" do
-      availability_data = load_data_from_file('5_out_of_10_bindery.dat')
+      availability_data = load_data_from_file('5_out_of_10_bindery_8486735.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
       availability_data[0].holdings[0].items.size.should  == 10
@@ -85,7 +86,7 @@ module UwCatalog
     end
 
     it "holding with all items available should status 'aggregated' status of available" do
-      availability_data = load_data_from_file('all_available.dat')
+      availability_data = load_data_from_file('all_available_3451268.dat')
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
       availability_data[0].holdings[0].items.size.should  == 3

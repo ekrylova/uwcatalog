@@ -1,0 +1,18 @@
+---
+- !ruby/struct
+  holding_id: 8654824
+  location_id: 695
+  location: Steenbock Stacks -1st Floor
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: SF271 C42 2006
+  item_enum: 
+  item_id: 7882467
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89098812589'
+  item_status: 1
+  item_status_date: 2012-09-28 00:38:25.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 

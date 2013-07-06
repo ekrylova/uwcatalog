@@ -1,0 +1,35 @@
+---
+- !ruby/struct
+  holding_id: 3775875
+  location_id: 548
+  location: Memorial Library Stacks Regular Size Shelving
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: DS811 D6
+  item_enum: 
+  item_id: 3622833
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89005807458'
+  item_status: 13
+  item_status_date: 2004-06-14 17:05:03.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
+- !ruby/struct
+  holding_id: 3775875
+  location_id: 548
+  location: Memorial Library Stacks Regular Size Shelving
+  temp_location_id: 0
+  temp_location: 
+  display_call_no: DS811 D6
+  item_enum: 
+  item_id: 3622833
+  copy_number: 1
+  on_reserve: N
+  item_type_id: 1
+  item_barcode: '89005807458'
+  item_status: 1
+  item_status_date: 2004-06-16 04:13:56.000000000 -05:00
+  current_due_date: 
+  hold_recall_status_date: 
