@@ -82,9 +82,9 @@ module UwCatalog
         when 2, 3
           status_date = item.current_due_date.strftime(@@date_format) unless item.current_due_date.nil?
           if (!item.item_enum.nil?)
-            status_text = "#{item.item_enum} #{status_text}, Due on #{status_date}"
+            status_text = "#{item.item_enum} Not Available - #{status_text}, Due on #{status_date}"
           else
-            status_text = "#{status_text}, Due on #{status_date}."
+            status_text = "Not Available - #{status_text}, Due on #{status_date}."
           end
         else  
           status_date = item.item_status_date.strftime(@@date_format) unless item.item_status_date.nil?
