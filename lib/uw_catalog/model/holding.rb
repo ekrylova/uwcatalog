@@ -47,18 +47,42 @@ module UwCatalog
       end
     end
 
+    def library_has
+      ret = Hash.new
+      marc = HoldingMarc.new(@id)
+      val = marc.bound_copies
+      ret[:bound_copies] = val unless (val.nil? or val.empty?) 
+      val = marc.indexes
+      ret[:indexes] = val unless (val.nil? or val.empty?) 
+      val = marc.supplements
+      ret[:supplements] = val unless (val.nil? or val.empty?) 
+      ret
+    end
+
     def get_items_display(concise = false)
       ret = Hash.new
       return ret unless items.size > 0
 
-      status_list = Array.new 
+      ret.merge!(library_has)
+
+      status_list = item_statuses(concise) 
+      ret[:status] = status_list 
+
+      ret
+    end
+
+
+    def item_statuses(concise)
+      status_list = Array.new
+      return status_list unless items.size > 0
 
       items.each do |item|
         status_available, status_text = get_status(item)
         status_list <<  {:item_id => item.id, :status_text => status_text,
-               :available => status_available, :copy_number=> item.copy_number, 
+               :available => status_available, :copy_number=> item.copy_number,
                :item_enum => item.item_enum}
       end
+
       if (concise)
         total_count = status_list.size
         status_list.keep_if{|i| i[:available] == false}.compact
@@ -68,8 +92,6 @@ module UwCatalog
       end
 
       status_list.sort! {|a,b| a[:item_enum].to_s <=> b[:item_enum].to_s} unless status_list.size < 1
-      ret[:status] = status_list
-      ret
     end
 
     def get_status(item)

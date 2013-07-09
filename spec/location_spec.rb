@@ -74,8 +74,19 @@ module UwCatalog
       availability_data.size.should  == 1
       availability_data[0].holdings.size.should  == 1
       availability_data[0].holdings[0].items.size.should  == 10
+      items_display = availability_data[0].holdings[0].get_items_display
+      bound_copies = items_display[:bound_copies]
+      bound_copies.size.should == 1
+      bound_copies[0].should == 'v. 1 - v. 5'
+      indexes = items_display[:indexes]
+      indexes.should be_nil
+      supplements = items_display[:supplements]
+      supplements.size.should == 1
+      supplements[0].should == 'v. 1 - v. 5'
+      items_status_data = items_display[:status]
       items_status_data = availability_data[0].holdings[0].get_items_display[:status]
       items_status_data.size.should  == 10
+
       concise = true
       unavailable_items = availability_data[0].holdings[0].get_items_display(concise)[:status]
       unavailable_items.size.should  == 5

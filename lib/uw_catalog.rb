@@ -1,10 +1,12 @@
 require 'rubygems'
 require 'data_mapper'
 require 'yaml'
+require 'marc'
 
 require 'uw_catalog/model/bib_data'
 require 'uw_catalog/model/location'
 require 'uw_catalog/model/holding'
+require 'uw_catalog/model/holding_marc'
 require 'uw_catalog/model/item'
 require 'uw_catalog/model/items_listing'
 require 'uw_catalog/voyager_sql'
