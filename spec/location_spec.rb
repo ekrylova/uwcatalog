@@ -30,7 +30,7 @@ module UwCatalog
       items_status_data.size.should  == 2
       items_status_data[0][:available].should == true
       items_status_data[1][:available].should == false
-      items_status_data[1][:status_text].should == '2 Checked Out, Due on December 30, 2013'
+      items_status_data[1][:status_text].should == 'Checked Out, Due on December 30, 2013'
     end
 
     it "lost holding should have item status date of the item" do
@@ -41,7 +41,7 @@ module UwCatalog
       items_status_data = availability_data[0].holdings[0].get_items_display[:status]
       items_status_data.size.should  == 1
       items_status_data[0][:available].should == false
-      items_status_data[0][:status_text].should == 'Lost June 14, 2004.'
+      items_status_data[0][:status_text].should == 'Lost June 14, 2004'
     end
 
     it "overdue holding should have item status date of the item" do
@@ -52,7 +52,7 @@ module UwCatalog
       items_status_data = availability_data[0].holdings[1].get_items_display[:status]
       items_status_data.size.should  == 1
       items_status_data[0][:available].should == false
-      items_status_data[0][:status_text].should == 'Overdue June 10, 2013.'
+      items_status_data[0][:status_text].should == 'Overdue June 10, 2013'
     end
 
 
@@ -64,9 +64,9 @@ module UwCatalog
       items_status_data = availability_data[0].holdings[0].get_items_display[:status]
       items_status_data.size.should  == 2
       items_status_data[0][:available].should == false
-      items_status_data[0][:status_text].should == 'v.1 Checked Out, Due on December 30, 2013'
+      items_status_data[0][:status_text].should == 'Checked Out, Due on December 30, 2013'
       items_status_data[1][:available].should == false
-      items_status_data[1][:status_text].should == 'v.2 Checked Out, Due on December 30, 2013'
+      items_status_data[1][:status_text].should == 'Checked Out, Due on December 30, 2013'
     end
 
     it "holding with 5 out of 10 items checkout should have item status date of all checkout items" do
@@ -91,9 +91,9 @@ module UwCatalog
       unavailable_items = availability_data[0].holdings[0].get_items_display(concise)[:status]
       unavailable_items.size.should  == 5
       unavailable_items[0][:available] == false
-      unavailable_items[0][:status_text].should == 'v.1:supp. At Bindery June 02, 2011'
+      unavailable_items[0][:status_text].should == 'At Bindery June 02, 2011'
       unavailable_items[4][:available] == false
-      unavailable_items[4][:status_text].should == 'v.5:supp. At Bindery June 02, 2011'
+      unavailable_items[4][:status_text].should == 'At Bindery June 02, 2011'
     end
 
     it "holding with all items available should status 'aggregated' status of available" do
