@@ -25,7 +25,7 @@ module UwCatalog
     def self.get_item_from_hash(d)
      item = Item.new({:id => d[:item_id], :item_enum=>d[:item_enum], 
                      :copy_number=>d[:copy_number], :on_reserve=>d[:on_reserve], 
-                     :item_status=>d[:item_status],     
+                     :item_status=>d[:item_status], :item_type_id=>d[:item_type_id],     
                      :item_barcode=>d[:item_barcode], 
                      :item_status_date=>d[:item_status_date], :current_due_date=>d[:current_due_date], 
                      :hold_recall_status_date=>d[:hold_recall_status_date]})

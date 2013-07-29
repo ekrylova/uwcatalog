@@ -34,8 +34,8 @@ module UwCatalog
       ", circ_transactions, hold_recall_items " +
       "where bib_mfhd.bib_id=? " + 
       "and bib_mfhd.mfhd_id=mfhd_master.mfhd_id " +
-      "and mfhd_master.location_id=hloc.location_id " + 
       "and mfhd_master.suppress_in_opac='N' " +
+      "and mfhd_master.location_id=hloc.location_id " + 
       "and hloc.suppress_in_opac='N' " +
       "and mfhd_master.mfhd_id=mfhd_item.mfhd_id " +
       "and mfhd_item.item_id=item.item_id " +

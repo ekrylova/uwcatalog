@@ -63,8 +63,6 @@ module UwCatalog
       ret = Hash.new
       return ret unless items.size > 0
 
-      ret.merge!(library_has)
-
       status_list = item_statuses(concise) 
       ret[:status] = status_list 
 
@@ -80,7 +78,7 @@ module UwCatalog
         status_available, status_text = get_status(item)
         status_list <<  {:item_id => item.id, :status_text => status_text,
                :available => status_available, :copy_number=> item.copy_number,
-               :item_enum => item.item_enum}
+               :item_enum => item.item_enum, : => item.}
       end
 
       if (concise)
