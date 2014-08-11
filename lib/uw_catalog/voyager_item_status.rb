@@ -1,6 +1,6 @@
 module UwCatalog
   class VoyagerItemStatus
-    @@ITEM_STATUSES = 
+    ITEM_STATUSES = 
       {
         0 => { :voyager_identifer => 0, :available => false, :forward_status => "Unknown", :display_date => false, :rank => 25 },
         1 => { :voyager_identifer => 1, :available => true, :forward_status => "Available", :display_date => false, :rank => 20 },
@@ -30,7 +30,7 @@ module UwCatalog
         25 => { :voyager_identifer => 25, :available => false, :forward_status => "Requested", :display_date => true, :rank => 17 }
       }
     def self.status_guide(status_code)
-      @@ITEM_STATUSES[status_code]
+      ITEM_STATUSES[status_code]
     end
 
     def available?(itemStatusCode)

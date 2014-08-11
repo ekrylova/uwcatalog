@@ -1,6 +1,5 @@
 module UwCatalog
   class Holding
-    @@date_format = "%B %d, %Y"
     attr_accessor :id, :call_number, :item_enum, :perm_location_id, :perm_location, :items
 
     def initialize(h=Hash.new)
@@ -10,41 +9,6 @@ module UwCatalog
 
     def  ==(another_holding)
       self.id == another_holding.id
-    end
-
-    def get_copies
-      if items.nil?
-	return Array.new
-      end
-      copies = items.collect {|c| c.copy_number}.uniq
-    end
-    
-    def self.get_item_rank(item)
-      status_guide = VoyagerItemStatus.status_guide(item.item_status.to_i)
-      status_guide[:rank]
-    end
-
-    def self.override_status(item)
-      (16 == item.item_status.to_i)
-    end
-
-    def add_item(item)
-      idx = items.index(item)
-      if idx.nil?
-        items << item
-      else
-        item_in_list = items.fetch(idx)
-        if Holding.override_status(item_in_list)
-        elsif Holding.override_status(item)
-            items.delete_at(idx)
-            items << item
-        else 
-          if Holding.get_item_rank(item_in_list) > Holding.get_item_rank(item)
-            items.delete_at(idx)
-            items << item
-          end
-        end
-      end
     end
 
     def library_has
@@ -68,7 +32,43 @@ module UwCatalog
 
       ret
     end
+    
+    def add_item(item)
+      idx = items.index(item)
+      if idx.nil?
+        items << item
+      else
+        item_in_list = items.fetch(idx)
+        if Holding.override_status(item_in_list)
+        elsif Holding.override_status(item)
+            items.delete_at(idx)
+            items << item
+        else 
+          if Holding.get_item_rank(item_in_list) > Holding.get_item_rank(item)
+            items.delete_at(idx)
+            items << item
+          end
+        end
+      end
+    end
 
+    private 
+    
+    def get_copies
+      if items.nil?
+        return Array.new
+      end
+      copies = items.collect {|c| c.copy_number}.uniq
+    end
+    
+    def self.override_status(item)
+      (16 == item.item_status.to_i)
+    end
+    
+    def self.get_item_rank(item)
+      status_guide = VoyagerItemStatus.status_guide(item.item_status.to_i)
+      status_guide[:rank]
+    end
 
     def item_statuses(concise)
       status_list = Array.new
@@ -78,14 +78,17 @@ module UwCatalog
         status_available, status_text = get_status(item)
         status_list <<  {:item_id => item.id, :status_text => status_text,
                :available => status_available, :copy_number=> item.copy_number,
-               :item_enum => item.item_enum}
+               :item_enum => item.item_enum,  :item_type_id => item.item_type_id,  
+               :noloan => (item.item_type_id == 2)}
       end
 
       if (concise)
         total_count = status_list.size
         status_list.keep_if{|i| i[:available] == false}.compact
         if (total_count > 0 && status_list.size == 0)
+          #reset status list to aggregated view with no specific item data
           status_list << {:status_text => 'Available', :available => true}
+          status_list[0][:noloan] = (items.select{|i| i.item_type_id ==2 }.size == items.size)          
         end
       end
 
@@ -99,13 +102,15 @@ module UwCatalog
      
       ret = status_text
       status_date = nil
+      date_format = "%B %d, %Y"
+      
       if status_guide[:display_date]
         case item.item_status.to_i
         when 2, 3
-          status_date = item.current_due_date.strftime(@@date_format) unless item.current_due_date.nil?
+          status_date = item.current_due_date.strftime(date_format) unless item.current_due_date.nil?
           status_text = "#{status_text}, Due on #{status_date}"
         else  
-          status_date = item.item_status_date.strftime(@@date_format) unless item.item_status_date.nil?
+          status_date = item.item_status_date.strftime(date_format) unless item.item_status_date.nil?
           status_text = "#{status_text} #{status_date}"
         end
       end

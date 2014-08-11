@@ -76,5 +76,24 @@ module UwCatalog
       "and not exists (select 'x' from mfhd_item mi where mi.mfhd_id = mfhd_master.mfhd_id)"
     end
 
+    def self.get_issues_recieved_sql()
+      "select serial_issues.enumchron " +
+      "from line_item_copy_status " +
+      "inner join subscription on line_item_copy_status.line_item_id = subscription.line_item_id " +
+      "inner join component on subscription.subscription_id = component.subscription_id " +
+      "inner join serial_issues on component.component_id = serial_issues.component_id " +
+      "inner join issues_received on issues_received.issue_id = serial_issues.issue_id " + 
+      "and component.component_id = issues_received.component_id " +
+      "where line_item_copy_status.mfhd_id = ? " +
+      "and component.category = ? " +
+      "and serial_issues.received = 1 " +
+      "and issues_received.opac_suppressed = 1"
+    end
+    
+    def self.get_marc_stream_sql()
+      "select mfhd_data.record_segment from mfhd_master, mfhd_data " + 
+      "where mfhd_master.mfhd_id=? " +
+      "and mfhd_master.mfhd_id = mfhd_data.mfhd_id"
+    end
   end
 end

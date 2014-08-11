@@ -22,13 +22,14 @@ module UwCatalog
       bibs
     end
 
-    def self.get_item_from_hash(d)
-     item = Item.new({:id => d[:item_id], :item_enum=>d[:item_enum], 
-                     :copy_number=>d[:copy_number], :on_reserve=>d[:on_reserve], 
-                     :item_status=>d[:item_status], :item_type_id=>d[:item_type_id],     
-                     :item_barcode=>d[:item_barcode], 
-                     :item_status_date=>d[:item_status_date], :current_due_date=>d[:current_due_date], 
-                     :hold_recall_status_date=>d[:hold_recall_status_date]})
+    def self.get_availability_data(bibid)
+      ret = Array.new
+      begin
+        data_hash = get_availability_data_hash(bibid)
+        parse_availability_data_hash(data_hash)
+      rescue => e
+        throw UwCatalogError.new("#{e.class}: #{e.message}")
+      end
     end
 
     def self.get_availability_data_hash(bibid)
@@ -38,11 +39,11 @@ module UwCatalog
     def self.parse_availability_data_hash(data_hash)
       ret = Array.new
       data_hash.each do |d|
-	loc_id = d[:location_id]
-	location = d[:location]
+      loc_id = d[:location_id]
+      location = d[:location]
         if !d[:temp_location].nil?
-           loc_id = d[:temp_location_id]
-	   location = d[:temp_location]
+          loc_id = d[:temp_location_id]
+          location = d[:temp_location]
         end
 
         loc = Location.new({:id => loc_id, :location => location})
@@ -62,20 +63,24 @@ module UwCatalog
         end
         if (!d[:item_id].nil?)
           item = get_item_from_hash(d) 
-	  holding.add_item(item)
+          holding.add_item(item)
         end
       end
+      ret = ret.sort {| a, b | a.location <=> b.location} unless ret.nil?
       ret
     end
 
-    def self.get_availability_data(bibid)
-      ret = Array.new
-      begin
-        data_hash = get_availability_data_hash(bibid)
-        parse_availability_data_hash(data_hash)
-      rescue => e
-        throw UwCatalogError.new("#{e.class}: #{e.message}") 
-      end
+    
+    private
+
+
+    def self.get_item_from_hash(d)
+     item = Item.new({:id => d[:item_id], :item_enum=>d[:item_enum],
+                     :copy_number=>d[:copy_number], :on_reserve=>d[:on_reserve],
+                     :item_status=>d[:item_status], :item_type_id=>d[:item_type_id],
+                     :item_barcode=>d[:item_barcode],
+                     :item_status_date=>d[:item_status_date], :current_due_date=>d[:current_due_date],
+                     :hold_recall_status_date=>d[:hold_recall_status_date]})
     end
 
     def self.get_items_data_hash(bibid)

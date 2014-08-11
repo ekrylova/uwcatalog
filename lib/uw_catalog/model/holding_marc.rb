@@ -1,10 +1,10 @@
 module UwCatalog
   class HoldingMarc
 
-    @@year_captions   = ['(year)', '(Year)', 'year', '(year covered)']
-    @@month_captions  = ['(month)', 'mo']
-    @@day_captions    = ['(day)']
-    @@season_captions = ['(season)']
+    YEAR_CAPTIONS   = ['(year)', '(Year)', 'year', '(year covered)']
+    MONTH_CAPTIONS  = ['(month)', 'mo']
+    DAY_CAPTIONS    = ['(day)']
+    SEASON_CAPTIONS = ['(season)']
  
     attr_reader :holding_id, :record
     
@@ -33,23 +33,14 @@ module UwCatalog
       supplements_internal
     end
 
-
+    private
 
     def new_issues
       issues_received(0)
     end
 
     def issues_received(category)
-      sql = "select serial_issues.enumchron " +
-            "from line_item_copy_status " +
-            "inner join subscription on line_item_copy_status.line_item_id = subscription.line_item_id " +
-            "inner join component on subscription.subscription_id = component.subscription_id " +
-            "inner join serial_issues on component.component_id = serial_issues.component_id " +
-            "inner join issues_received on issues_received.issue_id = serial_issues.issue_id and component.component_id = issues_received.component_id " +
-            "where line_item_copy_status.mfhd_id = ? " +
-            "and component.category = ? " +
-            "and serial_issues.received = 1 " +
-            "and issues_received.opac_suppressed = 1"
+      sql = VoyagerSql.get_issues_recieved_sql
       repository(:UW).adapter.select(sql, @holding_id, category)
     end
 
@@ -62,8 +53,7 @@ module UwCatalog
 
     def marc_stream
       marc_stream = ''
-      sql = "select mfhd_data.record_segment from mfhd_master, mfhd_data where mfhd_master.mfhd_id=? and " +
-            " mfhd_master.mfhd_id = mfhd_data.mfhd_id"
+      sql = VoyagerSql.get_marc_stream_sql
       mfhd_data_segments = repository(:UW).adapter.select(sql, @holding_id)
       mfhd_data_segments.each do |segment|
         marc_stream << segment
@@ -235,10 +225,10 @@ module UwCatalog
         
         # Locate the chronology subfields
         field.subfields.each do |subfield| 
-          caption_and_pattern[field['8']][:chronology][:year] = subfield.code if @@year_captions.include?(subfield.value)
-          caption_and_pattern[field['8']][:chronology][:month] = subfield.code if @@month_captions.include?(subfield.value)
-          caption_and_pattern[field['8']][:chronology][:day] = subfield.code if @@day_captions.include?(subfield.value)
-          caption_and_pattern[field['8']][:chronology][:season] = subfield.code if @@season_captions.include?(subfield.value)
+          caption_and_pattern[field['8']][:chronology][:year] = subfield.code if YEAR_CAPTIONS.include?(subfield.value)
+          caption_and_pattern[field['8']][:chronology][:month] = subfield.code if MONTH_CAPTIONS.include?(subfield.value)
+          caption_and_pattern[field['8']][:chronology][:day] = subfield.code if DAY_CAPTIONS.include?(subfield.value)
+          caption_and_pattern[field['8']][:chronology][:season] = subfield.code if SEASON_CAPTIONS.include?(subfield.value)
         end
 
         # Unless the chronology data is in subfield $a...
